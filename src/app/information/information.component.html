@@ -1,0 +1,55 @@
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+        <div class="tile">
+            <div class="tile is-parent">
+                <article class="tile is-child">
+                    <p class="title">{{recipe.title}}</p>
+                    <div class="subtitle columns">
+                        <div class="column columns is-gapless m-0">
+                            <div *ngFor="let className of scoreStars">
+                                <i [class]="className"></i>
+                            </div>
+                        </div>
+                        <p class="column has-text-right">
+                            Source <a [href]="recipe.sourceUrl" target="_blank">{{recipe.sourceName}}</a>
+                        </p>
+                    </div>
+                    <figure class="image is-4by3">
+                        <img [src]="recipe.image" crossorigin>
+                    </figure>
+                </article>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child">
+                <p class="title">Description</p>
+                <p class="subtitle">Aligned with the right tile</p>
+                <div class="content" [innerHtml]="recipe.summary">
+                </div>
+            </article>
+        </div>
+        <div class="tile is-parent" *ngIf="recipe.sourceName !== recipe.creditsText">
+            <article class="tile is-child">
+                <p class="title">Credits</p>
+                <div class="content">
+                    <p>
+                        {{recipe.sourceName}}
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="tile is-parent">
+        <article class="tile is-child box" *ngFor="let analyzedInstruction of recipe.analyzedInstructions">
+            <div class="content">
+                <p class="title">Steps</p>
+                <p class="subtitle">Use the following steps to cook this dish</p>
+                <div class="content">
+                    <ol>
+                        <app-step *ngFor="let step of analyzedInstruction.steps" [step]="step"></app-step>
+                    </ol>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
