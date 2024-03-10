@@ -1,0 +1,51 @@
+<article>
+    <p class="title">{{title}}</p>
+    <div class="subtitle columns">
+        <div class="column columns is-gapless m-0">
+            <div *ngFor="let starClass of scoreStars">
+                <i [class]="starClass"></i>
+            </div>
+        </div>
+        <p class="column has-text-right">
+            Source <a [href]="sourceUrl" target="_blank">{{sourceName}}</a>
+        </p>
+    </div>
+    <figure class="image is-4by3">
+        <img [src]="imageSource" crossorigin>
+    </figure>
+    <div class="my-3">
+        <div class="is-flex mb-2">
+            <div class="is-flex is-align-items-center">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span class="ml-2">
+                    {{readyInMinutes}} minutes
+                </span>
+            </div>
+
+            <div class="is-flex is-align-items-center ml-4">
+                <i class="fa-solid fa-utensils"></i>
+                <span class="ml-2">
+                    {{servings}} servings
+                </span>
+            </div>
+        </div>
+
+        <div class="is-flex is-align-items-center mb-2" *ngIf="diets && diets.length !== 0">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <div class="tags ml-2 my-0">
+                <span class="tag is-link is-light my-auto" *ngFor="let diet of diets">
+                    {{diet}}
+                </span>
+            </div>
+        </div>
+
+        <div class="is-flex is-align-items-center" *ngIf="dishTypes && dishTypes.length !== 0">
+            <i class="fa-solid fa-bowl-food"></i>
+            <div class="tags ml-2 my-0">
+                <span class="tag is-link is-light my-auto" *ngFor="let dishType of dishTypes">
+                    {{dishType}}
+                </span>
+            </div>
+        </div>
+    </div>
+</article>

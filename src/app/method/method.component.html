@@ -1,0 +1,19 @@
+<article>
+    <div class="content">
+        <p class="title">Method</p>
+        <p class="subtitle">Step-by-Step recipe guide</p>
+        <div class="content">
+            <ol *ngIf="isRecipeLoaded && steps && steps.length !== 0">
+                <app-step *ngFor="let step of steps" [step]="step"></app-step>
+            </ol>
+
+            <p *ngIf="isRecipeLoaded && (!steps || steps.length === 0)">
+                Oops... no preparation steps found
+            </p>
+
+            <p *ngIf="!isRecipeLoaded">
+                Loading...
+            </p>
+        </div>
+    </div>
+</article>

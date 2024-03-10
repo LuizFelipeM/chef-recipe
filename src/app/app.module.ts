@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { InformationComponent } from './information/information.component';
 import { StepComponent } from './step/step.component';
+import { DescriptionComponent } from './description/description.component';
+import { MainInformationComponent } from './main-information/main-information.component';
+import { MethodComponent } from './method/method.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InformationComponent,
+    DescriptionComponent,
+    MainInformationComponent,
+    MethodComponent,
     StepComponent
   ],
   imports: [BrowserModule],
