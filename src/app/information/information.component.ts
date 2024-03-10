@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { state, getRouteParams, routes, api } from '@Chef/utility';
+import { AnalyzedInstructionsStep } from '../../types/AnalyzedInstructions';
 
 @Component({
   selector: 'app-information',
@@ -9,6 +10,7 @@ import { state, getRouteParams, routes, api } from '@Chef/utility';
 })
 export class InformationComponent implements OnInit, OnDestroy {
   @Input() recipe!: RecipeWithInformation
+  @Input() steps!: AnalyzedInstructionsStep[]
   @Input() scoreStars: string[] = new Array(5).fill("")
 
   stateSub!: Subscription
@@ -46,10 +48,7 @@ export class InformationComponent implements OnInit, OnDestroy {
     if (!recipe)
       return;
 
-    recipe.analyzedInstructions.forEach(ai => {
-      ai.steps = ai.steps.sort((s1, s2) => s1.number - s2.number)
-    })
-
+    this.steps = recipe.analyzedInstructions.flatMap(ai => ai.steps).sort((s1, s2) => s1.number - s2.number)
     this.recipe = recipe
   }
 

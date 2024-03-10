@@ -6,8 +6,8 @@
                     <p class="title">{{recipe.title}}</p>
                     <div class="subtitle columns">
                         <div class="column columns is-gapless m-0">
-                            <div *ngFor="let className of scoreStars">
-                                <i [class]="className"></i>
+                            <div *ngFor="let starClass of scoreStars">
+                                <i [class]="starClass"></i>
                             </div>
                         </div>
                         <p class="column has-text-right">
@@ -17,37 +17,68 @@
                     <figure class="image is-4by3">
                         <img [src]="recipe.image" crossorigin>
                     </figure>
+                    <div class="my-3">
+                        <div class="is-flex mb-2">
+                            <div class="is-flex is-align-items-center">
+                                <i class="fa-solid fa-stopwatch"></i>
+                                <span class="ml-2">
+                                    {{recipe.readyInMinutes}} minutes
+                                </span>
+                            </div>
+
+                            <div class="is-flex is-align-items-center ml-4">
+                                <i class="fa-solid fa-utensils"></i>
+                                <span class="ml-2">
+                                    {{recipe.servings}} servings
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="is-flex is-align-items-center mb-2"
+                            *ngIf="recipe.diets && recipe.diets.length !== 0">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                            <div class="tags ml-2 my-0">
+                                <span class="tag is-link is-light my-auto" *ngFor="let diet of recipe.diets">
+                                    {{diet}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="is-flex is-align-items-center"
+                            *ngIf="recipe.dishTypes && recipe.dishTypes.length !== 0">
+                            <i class="fa-solid fa-bowl-food"></i>
+                            <div class="tags ml-2 my-0">
+                                <span class="tag is-link is-light my-auto" *ngFor="let dishType of recipe.dishTypes">
+                                    {{dishType}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </article>
             </div>
         </div>
         <div class="tile is-parent">
             <article class="tile is-child">
                 <p class="title">Description</p>
-                <p class="subtitle">Aligned with the right tile</p>
-                <div class="content" [innerHtml]="recipe.summary">
-                </div>
-            </article>
-        </div>
-        <div class="tile is-parent" *ngIf="recipe.sourceName !== recipe.creditsText">
-            <article class="tile is-child">
-                <p class="title">Credits</p>
                 <div class="content">
-                    <p>
-                        {{recipe.sourceName}}
-                    </p>
+                    <p [innerHtml]="recipe.summary"></p>
                 </div>
             </article>
         </div>
     </div>
     <div class="tile is-parent">
-        <article class="tile is-child box" *ngFor="let analyzedInstruction of recipe.analyzedInstructions">
+        <article class="tile is-child box">
             <div class="content">
-                <p class="title">Steps</p>
-                <p class="subtitle">Use the following steps to cook this dish</p>
+                <p class="title">Method</p>
+                <p class="subtitle">Step-by-Step recipe guide</p>
                 <div class="content">
-                    <ol>
-                        <app-step *ngFor="let step of analyzedInstruction.steps" [step]="step"></app-step>
+                    <ol *ngIf="steps && steps.length !== 0">
+                        <app-step *ngFor="let step of steps" [step]="step"></app-step>
                     </ol>
+
+                    <p *ngIf="!steps || steps.length === 0">
+                        Oops... no preparation steps found
+                    </p>
                 </div>
             </div>
         </article>
