@@ -5,6 +5,7 @@ import { StepComponent } from './step/step.component';
 import { DescriptionComponent } from './description/description.component';
 import { MainInformationComponent } from './main-information/main-information.component';
 import { MethodComponent } from './method/method.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { MethodComponent } from './method/method.component';
     DescriptionComponent,
     MainInformationComponent,
     MethodComponent,
-    StepComponent
+    StepComponent,
+    CarouselComponent
   ],
   imports: [BrowserModule],
   bootstrap: [AppComponent]

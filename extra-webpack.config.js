@@ -6,6 +6,6 @@ module.exports = (config, options) => {
 
   // Feel free to modify this webpack config however you'd like to
   return merge(singleSpaWebpackConfig, {
-    externals: ["rxjs", "@Chef/utility"]
+    externals: ["rxjs", "@Chef/utility", "@Chef/carousel"]
   });
 };

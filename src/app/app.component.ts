@@ -28,8 +28,11 @@ export class AppComponent {
       }
     })
 
-    if (!this.recipe || reloadRecipe)
+    if (!this.recipe || reloadRecipe) {
       this.getRecipe(id)
+        .then((recipe) => state.next({ recipe }))
+        .catch(console.error)
+    }
   }
 
   ngOnDestroy(): void {
@@ -37,16 +40,11 @@ export class AppComponent {
     state.next({ recipe: undefined })
   }
 
-  async getRecipe(id: number) {
-    try {
-      const recipe = await api.recipes.getInformation(Number(id))
-      this.setRecipe(recipe)
-    } catch (error) {
-      console.error(error)
-    }
+  async getRecipe(id: number): Promise<RecipeWithInformation> {
+    return await api.recipes.getInformation(Number(id))
   }
 
-  setRecipe(recipe?: RecipeWithInformation) {
+  setRecipe(recipe: RecipeWithInformation | undefined) {
     if (!recipe)
       throw new Error("Cannot set an empty recipe")
 

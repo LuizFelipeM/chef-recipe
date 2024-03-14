@@ -1,5 +1,7 @@
 type RecipeWithInformation = import("./Recipe").RecipeWithInformation
 
+declare module "@Chef/carousel"
+
 declare module "@Chef/utility" {
   export const routes: Record<string, string>
   export const state: import("rxjs").BehaviorSubject<{ recipe?: RecipeWithInformation }>
