@@ -5,6 +5,7 @@ import { singleSpaAngular, getSingleSpaExtraProviders } from 'single-spa-angular
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { singleSpaPropsSubject } from './single-spa/single-spa-props';
+import { AppProps, LifeCycleFn } from 'single-spa';
 
 if (environment.production) {
   enableProdMode();
@@ -21,6 +22,11 @@ const lifecycles = singleSpaAngular({
   NgZone,
 });
 
-export const bootstrap = lifecycles.bootstrap;
+export let mountParcel: AppProps["mountParcel"] | undefined = undefined
+export const bootstrap: LifeCycleFn<unknown> | LifeCycleFn<unknown>[] = async (props) => {
+  mountParcel = props.mountParcel
+  return lifecycles.bootstrap
+}
+
 export const mount = lifecycles.mount;
 export const unmount = lifecycles.unmount;
