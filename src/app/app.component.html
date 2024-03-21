@@ -1,21 +1,19 @@
-<div class="container">
-    <div class="tile is-ancestor">
-        <div class="tile is-vertical is-8">
-            <div class="tile">
-                <div class="tile is-parent">
-                    <app-main-information class="tile is-child" [title]="recipe?.title" [sourceUrl]="recipe?.sourceUrl"
-                        [sourceName]="recipe?.sourceName" [imageSource]="recipe?.image"
-                        [readyInMinutes]="recipe?.readyInMinutes" [servings]="recipe?.servings" [diets]="recipe?.diets"
-                        [dishTypes]="recipe?.dishTypes" [score]="recipe?.spoonacularScore"></app-main-information>
-                </div>
-            </div>
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+        <div class="tile">
             <div class="tile is-parent">
-                <app-description class="tile is-child" [content]="recipe?.summary"></app-description>
+                <app-main-information class="tile is-child" [title]="recipe?.title" [sourceUrl]="recipe?.sourceUrl"
+                    [sourceName]="recipe?.sourceName" [imageSource]="recipe?.image"
+                    [readyInMinutes]="recipe?.readyInMinutes" [servings]="recipe?.servings" [diets]="recipe?.diets"
+                    [dishTypes]="recipe?.dishTypes" [score]="recipe?.spoonacularScore"></app-main-information>
             </div>
         </div>
         <div class="tile is-parent">
-            <app-method class="tile is-child box" [isRecipeLoaded]="!!recipe" [steps]="steps"></app-method>
+            <app-description class="tile is-child" [content]="recipe?.summary"></app-description>
         </div>
     </div>
-    <app-carousel></app-carousel>
+    <div class="tile is-parent">
+        <app-method class="tile is-child box" [isRecipeLoaded]="!!recipe" [steps]="steps"></app-method>
+    </div>
 </div>
+<app-carousel></app-carousel>
