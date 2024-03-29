@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { AnalyzedInstructionsStep } from '../types/AnalyzedInstructions';
 import { Subscription } from 'rxjs';
 import { api, getRouteParams, routes, state } from '@Chef/utility';
@@ -8,47 +8,44 @@ import { api, getRouteParams, routes, state } from '@Chef/utility';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  @Input() recipe?: RecipeWithInformation
-  @Input() steps: AnalyzedInstructionsStep[] = []
-  @Input() scoreStars: string[] = new Array(5).fill("")
+export class AppComponent implements OnDestroy {
+  public recipe?: RecipeWithInformation
+  public steps: AnalyzedInstructionsStep[] = []
+  public scoreStars: string[] = new Array(5).fill("")
 
-  stateSub!: Subscription
+  private subs!: Subscription
 
-  ngOnInit(): void {
-    let reloadRecipe = false
-    const id = Number(getRouteParams(routes["RECIPE"])["id"])
-
-    this.stateSub = state.subscribe(({ recipe }) => {
-      try {
+  constructor(private cdr: ChangeDetectorRef) {
+    this.subs = state
+      .subscribe(({ recipe }) => {
         this.setRecipe(recipe)
-        reloadRecipe = id !== this.recipe?.id
-      } catch (error) {
-        reloadRecipe = true
-      }
-    })
-
-    if (!this.recipe || reloadRecipe) {
-      this.getRecipe(id)
-        .then((recipe) => state.next({ recipe }))
-        .catch(console.error)
-    }
+        if (recipe)
+          this.cdr.detectChanges()
+      })
   }
 
-  ngOnDestroy(): void {
-    this.stateSub.unsubscribe()
+  public ngOnDestroy(): void {
+    this.subs.unsubscribe()
     state.next({ recipe: undefined })
   }
 
-  async getRecipe(id: number): Promise<RecipeWithInformation> {
+  private getParamId(): number {
+    return Number(getRouteParams(routes["RECIPE"])["id"])
+  }
+
+  private async getRecipe(id: number): Promise<RecipeWithInformation> {
     return await api.recipes.getInformation(Number(id))
   }
 
-  setRecipe(recipe: RecipeWithInformation | undefined) {
-    if (!recipe)
-      throw new Error("Cannot set an empty recipe")
-
-    this.recipe = recipe
-    this.steps = recipe.analyzedInstructions.flatMap(ai => ai.steps).sort((s1, s2) => s1.number - s2.number)
+  private setRecipe(recipe: RecipeWithInformation | undefined) {
+    const paramId = this.getParamId()
+    if (recipe && paramId === recipe.id) {
+      this.recipe = recipe
+      this.steps = recipe.analyzedInstructions?.flatMap(ai => ai.steps).sort((s1, s2) => s1.number - s2.number) ?? []
+    } else {
+      this.getRecipe(paramId)
+        .then((recipe) => state.next({ recipe }))
+        .catch(console.error)
+    }
   }
 }

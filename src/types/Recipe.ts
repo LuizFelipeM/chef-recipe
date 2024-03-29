@@ -1,5 +1,5 @@
 import { AnalyzedInstructions } from "./AnalyzedInstructions";
-import { Ingredient } from "./Ingredient";
+import { ExtendedIngredient, Ingredient } from "./Ingredient";
 
 export interface BaseRecipe {
   id: number;
@@ -42,6 +42,7 @@ export interface RecipeWithInformation extends BaseRecipe {
   summary: string
   cuisines: string[],
   dishTypes: string[],
+  extendedIngredients?: ExtendedIngredient[]
   diets: string[],
   occasions: string[],
   analyzedInstructions: AnalyzedInstructions[],

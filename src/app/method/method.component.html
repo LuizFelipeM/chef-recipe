@@ -3,17 +3,28 @@
         <p class="title">Method</p>
         <p class="subtitle">Step-by-Step recipe guide</p>
         <div class="content">
-            <ol *ngIf="isRecipeLoaded && steps && steps.length !== 0">
-                <app-step *ngFor="let step of steps" [step]="step"></app-step>
-            </ol>
+            <div *ngIf="isRecipeLoaded; then loaded else loading">
+            </div>
+            <ng-template #loaded>
+                <div *ngIf="steps && steps.length !== 0; then displaySteps else stepsNotFound">
+                </div>
+                <ng-template #displaySteps>
+                    <ol>
+                        <app-step *ngFor="let step of steps" [step]="step"></app-step>
+                    </ol>
+                </ng-template>
+                <ng-template #stepsNotFound>
+                    <p>
+                        Oops... no preparation steps found
+                    </p>
+                </ng-template>
+            </ng-template>
 
-            <p *ngIf="isRecipeLoaded && (!steps || steps.length === 0)">
-                Oops... no preparation steps found
-            </p>
-
-            <p *ngIf="!isRecipeLoaded">
-                Loading...
-            </p>
+            <ng-template #loading>
+                <p>
+                    Loading...
+                </p>
+            </ng-template>
         </div>
     </div>
 </article>

@@ -1,0 +1,17 @@
+<article class="my-5">
+    <p class="title">Ingredients</p>
+    <div class="content">
+        <ul *ngIf="ingredients && ingredients.length !== 0; else noIngredientsFound">
+            <li *ngFor="let ingredient of ingredients">
+                <span class="has-tooltip-top-mobile has-tooltip-right-tablet"
+                    [attr.data-tooltip]="ingredient.measures.metric.amount + ' ' + ingredient.measures.metric.unitLong">
+                    {{ingredient.original}}
+                </span>
+            </li>
+        </ul>
+
+        <ng-template #noIngredientsFound>
+            <p>Oops... no ingredients found</p>
+        </ng-template>
+    </div>
+</article>

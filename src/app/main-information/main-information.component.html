@@ -1,17 +1,23 @@
 <article>
-    <p class="title">{{title}}</p>
-    <div class="subtitle columns">
-        <div class="column columns is-gapless m-0">
-            <div *ngFor="let starClass of scoreStars">
-                <i [class]="starClass"></i>
+    <h1 class="title">{{title}}</h1>
+    <div class="subtitle">
+        <div class="is-flex is-flex-direction-row is-justify-content-space-between">
+            <div>
+                <div class="is-flex is-flex-direction-row">
+                    <div *ngFor="let starClass of scoreStars">
+                        <i [class]="starClass"></i>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="has-text-right">
+                    Source <a [href]="sourceUrl" target="_blank">{{sourceName}}</a>
+                </p>
             </div>
         </div>
-        <p class="column has-text-right">
-            Source <a [href]="sourceUrl" target="_blank">{{sourceName}}</a>
-        </p>
     </div>
     <figure class="image is-4by3">
-        <img [src]="imageSource" crossorigin>
+        <img [src]="imageSource">
     </figure>
     <div class="my-3">
         <div class="is-flex mb-2">

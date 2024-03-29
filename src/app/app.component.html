@@ -1,19 +1,16 @@
-<div class="tile is-ancestor">
-    <div class="tile is-vertical is-8">
-        <div class="tile">
-            <div class="tile is-parent">
-                <app-main-information class="tile is-child" [title]="recipe?.title" [sourceUrl]="recipe?.sourceUrl"
-                    [sourceName]="recipe?.sourceName" [imageSource]="recipe?.image"
-                    [readyInMinutes]="recipe?.readyInMinutes" [servings]="recipe?.servings" [diets]="recipe?.diets"
-                    [dishTypes]="recipe?.dishTypes" [score]="recipe?.spoonacularScore"></app-main-information>
-            </div>
+<div class="fixed-grid has-1-cols-mobile has-2-cols-tablet">
+    <div class="grid is-column-gap-3">
+        <div class="cell">
+            <app-main-information [title]="recipe?.title" [sourceUrl]="recipe?.sourceUrl"
+                [sourceName]="recipe?.sourceName" [imageSource]="recipe?.image"
+                [readyInMinutes]="recipe?.readyInMinutes" [servings]="recipe?.servings" [diets]="recipe?.diets"
+                [dishTypes]="recipe?.dishTypes" [score]="recipe?.spoonacularScore"></app-main-information>
+            <app-description [content]="recipe?.summary"></app-description>
+            <app-ingredient [ingredients]="recipe?.extendedIngredients"></app-ingredient>
         </div>
-        <div class="tile is-parent">
-            <app-description class="tile is-child" [content]="recipe?.summary"></app-description>
+        <div class="cell is-flex is-flex-direction-column">
+            <app-method class="box is-flex-grow-1" [isRecipeLoaded]="!!recipe" [steps]="steps"></app-method>
         </div>
-    </div>
-    <div class="tile is-parent">
-        <app-method class="tile is-child box" [isRecipeLoaded]="!!recipe" [steps]="steps"></app-method>
     </div>
 </div>
 <app-carousel></app-carousel>
