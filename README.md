@@ -1,28 +1,70 @@
-# chef-recipe
-Single SPA Chef recipe component
+<h1 align="center">
+    <img
+        width="35"
+        alt="bowl food solid"
+        title="bowl food solid"
+        src="https://raw.githubusercontent.com/LuizFelipeM/chef-root/master/src/assets/bowl-food-solid.svg"
+    />
+    Chef Recipe - Single-SPA Application
+</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+This project was created to learn a set of [techonologies](#technologies). They are implemented just for fun in a recipes search website called Chef.
 
-## Development server
+This repository is the Single-SPA Application responsible for providing a recipe page showing informations about the selected recipe, ingredients needed and the preparation method. The recipe selected use the shared state provided by the [Utility Application](https://github.com/LuizFelipeM/chef-utility) and the [Chef-carousel](https://github.com/LuizFelipeM/chef-carousel) to show sceneraios when you have multiple microfrontends being mounted and called by the same page as parcels.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:9005/`. The application will automatically reload if you change any of the source files.
+## Demo
 
-## Code scaffolding
+If you want to see this and the other 7 applications in action access Chef [here](https://link-to-chef).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development process
 
-## Build
+You can see the whole development process documented on my [medium post](https://medium.com/).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Applications
 
-## Running unit tests
+The microfrontend architechture let each application be updated and deployed independently without affecting others.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Chef-root](https://github.com/LuizFelipeM/chef-root) - Root Config Application
+- [Chef-home](https://github.com/LuizFelipeM/chef-home) - React Application
+- [Chef-search](https://github.com/LuizFelipeM/chef-search) - React Application
+- **(This Repo)**[Chef-recipe](https://github.com/LuizFelipeM/chef-recipe) - Angular Application
+- [Chef-carousel](https://github.com/LuizFelipeM/chef-carousel) - Svelte Application
+- [Chef-searchbar](https://github.com/LuizFelipeM/chef-searchbar) - Vue Application
+- [Chef-styleguide](https://github.com/LuizFelipeM/chef-styleguide) - Vanilla JS/Mustache Application
+- [Chef-utility](https://github.com/LuizFelipeM/chef-utility) - Typescript Application
 
-## Running end-to-end tests
+## Technologies
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+For the management of the applications I used [Single-SPA](https://single-spa.js.org/) that has proven to be a powerful tool for microfrontend development and has plenty of features right out of the box. For styling I choose to use [Bulma](https://bulma.io/) CSS framework since it's easy to use, easy to setup, and they just released the v1.0 that catch my attention of its capabilities. And last but not least [Font Awesome](https://fontawesome.com/) to get incredible icons.
 
-## Further help
+All data was provided by the [Spoonacular API](https://spoonacular.com/food-api) and the [News API](https://newsapi.org/) that helped tremendously to focus only in the implementation and not in the data.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Running locally
+
+To run the whole application locally clone this repository and the other 7 repositories in the [applications](#applications) section.
+
+Run the install command:
+```bash
+npm install
+# or
+yarn install
+```
+
+Run it locally using the start command:
+```bash
+npm serve
+# or
+yarn serve
+```
+
+Do the process of [Running locally](#running-locally) described in each of the [applications](#applications) and you'll have the full application up and running.
+
+## Building for production
+
+To ship this application to production environment first need to build it using the following command
+```bash
+npm run build
+# or
+yarn build
+```
+it will produce the webpack build files in the `/dist` folder.
