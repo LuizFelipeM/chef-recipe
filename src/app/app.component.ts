@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { AnalyzedInstructionsStep } from '../types/AnalyzedInstructions';
 import { Subscription } from 'rxjs';
 import { api, getRouteParams, routes, state } from '@Chef/utility';
@@ -8,19 +8,27 @@ import { api, getRouteParams, routes, state } from '@Chef/utility';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   public recipe?: RecipeWithInformation
   public steps: AnalyzedInstructionsStep[] = []
   public scoreStars: string[] = new Array(5).fill("")
 
   private subs!: Subscription
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef) { }
+
+  public ngOnInit(): void {
     this.subs = state
       .subscribe(({ recipe }) => {
         this.setRecipe(recipe)
-        if (recipe)
+        if (recipe) {
           this.cdr.detectChanges()
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+        }
       })
   }
 
