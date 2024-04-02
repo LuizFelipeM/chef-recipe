@@ -8,6 +8,8 @@
     Chef Recipe - Single-SPA Application
 </h1>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8e3ec605-3267-47ed-9fe2-32f650abe268/deploy-status)](https://app.netlify.com/sites/chef-recipe-page/deploys)
+
 This project was created to learn a set of [techonologies](#technologies). They are implemented just for fun in a recipes search website called Chef.
 
 This repository is the Single-SPA Application responsible for providing a recipe page showing informations about the selected recipe, ingredients needed and the preparation method. The recipe selected use the shared state provided by the [Utility Application](https://github.com/LuizFelipeM/chef-utility) and the [Chef-carousel](https://github.com/LuizFelipeM/chef-carousel) to show sceneraios when you have multiple microfrontends being mounted and called by the same page as parcels.
